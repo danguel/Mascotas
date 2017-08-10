@@ -31,7 +31,14 @@
     End Property
 
     Private Function CalcularEdad(fechanacimeinto As Date) As UShort
-        Return DateDiff(DateInterval.Year, fechanacimeinto, Today)
+        'Return DateDiff(DateInterval.Year, fechanacimeinto, Today)
+        Dim valor As UShort
+        valor = DateDiff(DateInterval.Year, fechanacimeinto, Today)
+        If fechanacimeinto.Month > Today.Month _
+            Or (fechanacimeinto.Month = Today.Month And fechanacimeinto.Day > Today.Day) Then
+            valor -= 1
+        End If
+        Return valor
     End Function
     Public Sub Escuchar(frase As String)
         _memoria.Enqueue(frase)
